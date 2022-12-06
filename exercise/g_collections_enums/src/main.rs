@@ -50,12 +50,10 @@ fn main() {
     for coord in arrow_coords {
         coord.print_description();
         let distance_from_center = coord.distance_from_center();
-        let shot = if distance_from_center < 1.0 {
-            Shot::Bullseye
-        } else if distance_from_center < 5.0 {
-            Shot::Hit(distance_from_center)
-        } else {
-            Shot::Miss
+        let shot = match distance_from_center {
+            distance_from_center if distance_from_center < 1.0 => Shot::Bullseye,
+            distance_from_center if distance_from_center < 5.0 => Shot::Hit(distance_from_center),
+            _ => Shot::Miss,
         };
         shots.push(shot)
     }
