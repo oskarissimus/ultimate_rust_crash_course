@@ -27,10 +27,8 @@ impl Shot {
         match self {
             Self::Bullseye => 5,
             Self::Miss => 0,
-            Self::Hit(distance) => match distance < &3.0 {
-                true => 2,
-                false => 1,
-            },
+            Self::Hit(distance) if distance < &3.0 => 2,
+            Self::Hit(distance) => 1,
         }
     }
 }
